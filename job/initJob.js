@@ -32,6 +32,7 @@ function initJob(externalBag, callback) {
         result= {
           inPayload: bag.inPayload,
           isCI: bag.isCI,
+          buildJobId: bag.buildJobId,
           buildId: bag.buildId,
           jobId: bag.jobId,
           resourceId: bag.resourceId,
