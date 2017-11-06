@@ -51,7 +51,7 @@ function _checkInputParams(bag, next) {
       ' in incoming message', who));
     return next(true);
   }
-  bag.builderApiToken = bag.rawMessage.builderApiToken,
+  bag.builderApiToken = bag.rawMessage.builderApiToken;
   bag.builderApiAdapter = new Adapter(bag.rawMessage.builderApiToken);
   return next();
 }
