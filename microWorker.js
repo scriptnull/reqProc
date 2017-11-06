@@ -89,10 +89,11 @@ function _applyWorkflowStrategy(bag, next) {
   var who = bag.who + '|' + _applyWorkflowStrategy.name;
   logger.verbose(who, 'Inside');
 
+  // TODO: uncomment, after pipelines flow start handling runCI jobs
   // if it's CI, but has a resourceId in the payload, it must be runCI
-  if (bag.workflow === 'ci')
-    if (bag.rawMessage.payload && bag.rawMessage.payload.resourceId)
-      bag.workflow = 'pipelines';
+  // if (bag.workflow === 'ci')
+  //   if (bag.rawMessage.payload && bag.rawMessage.payload.resourceId)
+  //     bag.workflow = 'pipelines';
 
   var strategyPath = workflowPath.replace(pathPlaceholder, bag.workflow);
   var workflowStrategy;
