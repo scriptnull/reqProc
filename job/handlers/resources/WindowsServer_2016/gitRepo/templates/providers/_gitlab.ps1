@@ -71,7 +71,6 @@ $PROJECT = @'
 Function git_sync() {
   ########### Temp
   choco install -y openssh
-  refreshenv
   ##########
 
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
@@ -83,7 +82,7 @@ Function git_sync() {
   }
   mkdir $ssh_dir
   echo "$PRIVATE_KEY" | Out-File $key_file_path
-  & FixUserFilePermissions.ps1
+  & 'C:\Program Files\OpenSSH-Win64\FixUserFilePermissions.ps1'
 
   ssh-agent
   ssh-add $key_file_path
