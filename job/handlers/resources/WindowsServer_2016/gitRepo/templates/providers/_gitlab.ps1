@@ -69,6 +69,11 @@ $PROJECT = @'
 '@
 
 Function git_sync() {
+  ########### Temp
+  choco install -y openssh
+  refreshenv
+  ##########
+
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
   $key_file_path = Join-Path "$ssh_dir" "id_rsa"
 
