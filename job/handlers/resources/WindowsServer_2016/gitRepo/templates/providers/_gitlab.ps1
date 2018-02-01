@@ -89,6 +89,8 @@ Function git_sync() {
   # ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
   & FixUserFilePermissions.ps1
 
+  net start sshd
+
   echo "----> ssh-agent"
   ssh-agent
 
