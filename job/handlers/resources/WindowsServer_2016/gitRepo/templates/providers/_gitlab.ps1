@@ -72,6 +72,7 @@ Function git_sync() {
   ########### Temp
   choco install -y openssh
   $env:PATH += ';C:\Program Files\OpenSSH-Win64'
+  & 'C:\Program Files\OpenSSH-Win64\install-sshd.ps1'
   ##########
 
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
