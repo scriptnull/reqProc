@@ -69,6 +69,21 @@ $PROJECT = @'
 '@
 
 Function git_sync() {
+  $ssh_dir = Join-Path "$global:HOME" ".ssh"
+  $key_file_path = Join-Path "$ssh_dir" "id_rsa"
+
+  if (Test-Path $ssh_dir) {
+    echo "----> Removing $ssh_dir"
+    Remove-Item -Recurse -Force $ssh_dir
+  }
+  mkdir $ssh_dir
+  echo "$PRIVATE_KEY" | Out-File $key_file_path
+  & FixUserFilePermissions.ps1
+
+  ssh-agent
+  ssh-add $key_file_path
+
+  $env:GIT_SSH = 'C:\Program Files\OpenSSH-Win64\ssh.exe'
   $temp_clone_path = Join-Path "$env:TEMP" "Shippable\gitRepo"
 
   if (Test-Path $temp_clone_path) {
