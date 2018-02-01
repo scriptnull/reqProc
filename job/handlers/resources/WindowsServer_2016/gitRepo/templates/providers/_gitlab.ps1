@@ -76,13 +76,15 @@ Function git_sync() {
 
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
   $key_file_path = Join-Path "$ssh_dir" "id_rsa"
+  $known_hosts_path = Join-Path "$ssh_dir" "known_hosts"
 
   if (Test-Path $ssh_dir) {
     echo "----> Removing $ssh_dir"
     Remove-Item -Recurse -Force $ssh_dir
   }
   mkdir $ssh_dir
-  echo "$PRIVATE_KEY" | Out-File $key_file_path
+  echo "$PRIVATE_KEY" | Out-File -Encoding utf8 -FilePath $key_file_path
+  ssh-keygen gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
   & FixUserFilePermissions.ps1
 
   ssh-agent
