@@ -73,6 +73,7 @@ Function git_sync() {
   choco install -y openssh
   $env:PATH += ';C:\Program Files\OpenSSH-Win64'
   & 'C:\Program Files\OpenSSH-Win64\install-sshd.ps1'
+  $env:GIT_SSH = 'C:\Program Files\OpenSSH-Win64\ssh.exe'
   ##########
 
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
@@ -85,7 +86,7 @@ Function git_sync() {
   }
   mkdir $ssh_dir
   echo "$PRIVATE_KEY" | Out-File -Encoding utf8 -FilePath $key_file_path
-  ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
+  # ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
   & FixUserFilePermissions.ps1
 
   echo "----> ssh-agent"
@@ -97,7 +98,6 @@ Function git_sync() {
   echo "----> ssh-add -l"
   ssh-add -l
 
-  $env:GIT_SSH = 'C:\Program Files\OpenSSH-Win64\ssh.exe'
   $temp_clone_path = Join-Path "$env:TEMP" "Shippable\gitRepo"
 
   if (Test-Path $temp_clone_path) {
