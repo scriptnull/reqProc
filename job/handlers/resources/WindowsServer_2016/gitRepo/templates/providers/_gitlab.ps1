@@ -86,7 +86,7 @@ Function git_sync() {
   }
   mkdir $ssh_dir
   echo "$PRIVATE_KEY" | Out-File -Encoding utf8 -FilePath $key_file_path
-  ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
+  #ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
   & FixUserFilePermissions.ps1
 
   net start sshd
