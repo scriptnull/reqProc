@@ -86,10 +86,7 @@ Function git_sync() {
   }
   mkdir $ssh_dir
   [IO.File]::WriteAllLines($key_file_path, $PRIVATE_KEY)
-  node -e "var fs = require('fs'); var buf = fs.readFileSync('C:\\Users\\ContainerAdministrator\\.ssh\\id_rsa'); console.log(buf.join(' '))"
   ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
-  # TODO remove cat
-  cat $known_hosts_path
   & FixUserFilePermissions.ps1
 
   net start sshd
