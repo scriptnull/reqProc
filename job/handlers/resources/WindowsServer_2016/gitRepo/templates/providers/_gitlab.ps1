@@ -69,13 +69,6 @@ $PROJECT = @'
 '@
 
 Function git_sync() {
-  ########### Temp
-  choco install -y openssh
-  $env:PATH += ';C:\Program Files\OpenSSH-Win64'
-  & 'C:\Program Files\OpenSSH-Win64\install-sshd.ps1'
-  $env:GIT_SSH = 'C:\Program Files\OpenSSH-Win64\ssh.exe'
-  ##########
-
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
   $key_file_path = Join-Path "$ssh_dir" "id_rsa"
   $known_hosts_path = Join-Path "$ssh_dir" "known_hosts"
@@ -88,8 +81,6 @@ Function git_sync() {
   [IO.File]::WriteAllLines($key_file_path, $PRIVATE_KEY)
   ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
   & FixUserFilePermissions.ps1
-
-  net start sshd
 
   echo "----> ssh-agent"
   ssh-agent
