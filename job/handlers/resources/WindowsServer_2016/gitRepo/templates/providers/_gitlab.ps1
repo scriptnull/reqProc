@@ -72,11 +72,10 @@ Function git_sync() {
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
   $key_file_path = Join-Path "$ssh_dir" "id_rsa"
 
-  if (Test-Path $ssh_dir) {
-    echo "----> Removing $ssh_dir"
-    Remove-Item -Recurse -Force $ssh_dir
+  if (Test-Path $key_file_path) {
+    echo "----> Removing $key_file_path"
+    Remove-Item -Force $key_file_path
   }
-  mkdir $ssh_dir
   [IO.File]::WriteAllLines($key_file_path, $PRIVATE_KEY)
   & FixUserFilePermissions.ps1
 
@@ -88,6 +87,8 @@ Function git_sync() {
 
   echo "----> ssh-add -l"
   ssh-add -l
+
+  Remove-Item -Force $key_file_path
 
   $temp_clone_path = Join-Path "$env:TEMP" "Shippable\gitRepo"
 
