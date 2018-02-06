@@ -71,7 +71,6 @@ $PROJECT = @'
 Function git_sync() {
   $ssh_dir = Join-Path "$global:HOME" ".ssh"
   $key_file_path = Join-Path "$ssh_dir" "id_rsa"
-  $known_hosts_path = Join-Path "$ssh_dir" "known_hosts"
 
   if (Test-Path $ssh_dir) {
     echo "----> Removing $ssh_dir"
@@ -79,7 +78,6 @@ Function git_sync() {
   }
   mkdir $ssh_dir
   [IO.File]::WriteAllLines($key_file_path, $PRIVATE_KEY)
-  ssh-keyscan gitlab.com | Out-File -Encoding utf8 -FilePath $known_hosts_path
   & FixUserFilePermissions.ps1
 
   echo "----> ssh-agent"
