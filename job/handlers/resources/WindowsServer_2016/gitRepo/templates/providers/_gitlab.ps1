@@ -86,7 +86,7 @@ Function git_sync() {
   }
   mkdir $ssh_dir
   echo "$PRIVATE_KEY" | Out-File -Encoding utf8 -NoNewline -FilePath $key_file_path
-  node -e "var fs = require('fs'); var buf = fs.readFileSync('C:\\Users\\ContainerAdministrator\\.ssh\id_rsa'); console.log(buf.join(' '))"
+  node -e "var fs = require('fs'); var buf = fs.readFileSync('C:\\Users\\ContainerAdministrator\\.ssh\\id_rsa'); console.log(buf.join(' '))"
   ssh-keyscan gitlab.com | Out-File -Encoding utf8 -NoNewline -FilePath $known_hosts_path
   # TODO remove cat
   cat $known_hosts_path
