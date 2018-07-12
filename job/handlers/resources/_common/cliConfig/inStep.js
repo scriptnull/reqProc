@@ -65,6 +65,7 @@ function _copyIntegrationInitScript(bag, next) {
     fs.copySync(templatesCommonFolderPath, path.join(bag.buildScriptsDir,
       'resources', 'common'));
     fs.copySync(integrationScriptTemplate, destinationInitFilePath);
+    console.log('mylog destinationInitFilePath - ' + destinationInitFilePath);
   } catch (e) {
     return next(e);
   }
